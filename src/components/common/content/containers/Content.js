@@ -6,13 +6,14 @@ export default class Content extends React.Component {
         super(props);
 
         this.state = {
-            content: this.props.content
+            content: this.props.content,
+            onlyContent: this.props.onlyContent
         }
     }
 
     render() {
         return (
-            <Visual content={this.state.content}></Visual>
+            <Visual content={this.state.content} onlyContent={this.state.onlyContent}></Visual>
         )
     }
 }

@@ -12,7 +12,7 @@ export default class browserContentPanel extends React.Component {
     render() {
         let contents = []
         for (let content in this.state.contentMap) {
-            contents.push(<Content key={this.state.contentMap[content].id} content={this.state.contentMap[content]}></Content>)
+            contents.push(<Content key={this.state.contentMap[content].id} content={this.state.contentMap[content]} onlyContent={false}></Content>)
         }
         return (<div>{contents}</div>);
             
