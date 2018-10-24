@@ -9,7 +9,7 @@ export default class Presentation extends React.Component {
             id:this.props.pres.id,
             title:this.props.pres.title,
             description:this.props.pres.description,
-            slidArray:this.props.slidArray,
+            slidArray:this.props.pres.slidArray,
             contentMap:this.props.contentMap
         }
         this.handleChangeTitle = this.handleChangeTitle.bind(this);

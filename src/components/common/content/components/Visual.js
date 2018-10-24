@@ -3,7 +3,6 @@ import React from 'react';
 export default class Visual extends React.Component {
     constructor(props) {
         super(props);
-        console.log(this.props)
         this.state = {
             id: props.content.id,
             src: props.content.src,

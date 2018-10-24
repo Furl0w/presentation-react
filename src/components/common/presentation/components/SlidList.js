@@ -8,7 +8,7 @@ export default class SlidList extends React.Component {
     render() {
         let slids = []
         for(let slid of this.props.slidArray){
-            slids.push(<Slid slid={slid} contentMap={this.props.contentMap} displayMode={"SHORT"}></Slid>)
+            slids.push(<Slid key={slid.id} slid={slid} contentMap={this.props.contentMap} displayMode={"SHORT"}></Slid>)
         }
         return (
             <div>

@@ -2,7 +2,10 @@ import React from 'react';
 import Content from '../../content/containers/Content'
 import EditMetaSlid from '../components/EditMetaSlid'
 
-export default class Slid extends React.Component {
+import {connect} from 'react-redux';
+import {setSelectedSlid} from '../../../../actions'
+
+class Slid extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -15,6 +18,7 @@ export default class Slid extends React.Component {
         }
         this.handleChangeTitle = this.handleChangeTitle.bind(this);
         this.handleChangeTxt = this.handleChangeTxt.bind(this);
+        this.updateSelectedSlid = this.updateSelectedSlid.bind(this);
     }
     handleChangeTitle(e) {
         this.setState({ title: e.target.value });
@@ -22,11 +26,15 @@ export default class Slid extends React.Component {
     handleChangeTxt(e) {
         this.setState({ txt: e.target.value });
     }
+    updateSelectedSlid() {
+        let tmpSlid = this.props.slid;
+        this.props.dispatch(setSelectedSlid(tmpSlid));
+    }
 
     render() {
         switch (this.state.displayMode) {
             case "SHORT": return (
-                <div>
+                <div onClick={this.updateSelectedSlid}>
                     <h1>{this.state.title}</h1>
                     <p>{this.state.txt}</p>
                     <Content key={this.state.contentMap[this.state.content_id].id} content={this.state.contentMap[this.state.content_id]} onlyContent={true}></Content>
@@ -34,8 +42,8 @@ export default class Slid extends React.Component {
             )
             case "FULL_MNG": return (
                 <div>
-                    <EditMetaSlid title={this.state.title} handleChangeTitle={this.handleChangeTitle} txt={this.state.txt} handleChangeTxt={this.handleChangeTxt}></EditMetaSlid>
-                    <Content key={this.state.contentMap[this.state.content_id].id} content={this.state.contentMap[this.state.content_id]} onlyContent={true}></Content>
+                    <EditMetaSlid title={this.props.slid.title} handleChangeTitle={this.handleChangeTitle} txt={this.props.slid.txt} handleChangeTxt={this.handleChangeTxt}></EditMetaSlid>
+                    <Content key={this.props.contentMap[this.props.slid.content_id].id} content={this.props.contentMap[this.props.slid.content_id]} onlyContent={true}></Content>
                 </div>
             )
             default: return (
@@ -46,3 +54,5 @@ export default class Slid extends React.Component {
         }
     }
 }
+
+export default connect() (Slid);
