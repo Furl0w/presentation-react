@@ -6,11 +6,11 @@ export default class Slid extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            id: this.props.id,
-            title: this.props.title,
-            txt: this.props.txt,
-            content_id: this.props.content_id,
-            contentMap: this.props.content,
+            id: this.props.slid.id,
+            title: this.props.slid.title,
+            txt: this.props.slid.txt,
+            content_id: this.props.slid.content_id,
+            contentMap: this.props.contentMap,
             displayMode: this.props.displayMode
         }
         this.handleChangeTitle = this.handleChangeTitle.bind(this);
