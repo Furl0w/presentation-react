@@ -13,7 +13,6 @@ class Slid extends React.Component {
             title: this.props.slid.title,
             txt: this.props.slid.txt,
             content_id: this.props.slid.content_id,
-            contentMap: this.props.contentMap,
             displayMode: this.props.displayMode
         }
         this.handleChangeTitle = this.handleChangeTitle.bind(this);
@@ -37,7 +36,7 @@ class Slid extends React.Component {
                 <div onClick={this.updateSelectedSlid}>
                     <h1>{this.state.title}</h1>
                     <p>{this.state.txt}</p>
-                    <Content key={this.state.contentMap[this.state.content_id].id} content={this.state.contentMap[this.state.content_id]} onlyContent={true}></Content>
+                    <Content key={this.props.contentMap[this.state.content_id].id} content={this.props.contentMap[this.state.content_id]} onlyContent={true}></Content>
                 </div>
             )
             case "FULL_MNG": return (
@@ -54,5 +53,10 @@ class Slid extends React.Component {
         }
     }
 }
+const mapStateToProps = (state, ownProps) => {
+    return {
+        contentMap: state.updateModelReducer.content_map
+    }
+}
 
-export default connect() (Slid);
+export default connect(mapStateToProps) (Slid);

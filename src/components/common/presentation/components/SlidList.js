@@ -1,6 +1,7 @@
 import React from 'react';
 import Slid from '../../slid/containers/Slid'
 
+
 export default class SlidList extends React.Component {
     constructor(props) {
         super(props);

@@ -1,20 +1,29 @@
 import React from 'react';
 import Content from '../../common/content/containers/Content'
 
-export default class browserContentPanel extends React.Component {
+
+import { connect } from 'react-redux'
+
+class browserContentPanel extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            contentMap: this.props.content
         }
     }
 
     render() {
         let contents = []
-        for (let content in this.state.contentMap) {
-            contents.push(<Content key={this.state.contentMap[content].id} content={this.state.contentMap[content]} onlyContent={false}></Content>)
+        for (let content in this.props.contentMap) {
+            contents.push(<Content key={this.props.contentMap[content].id} content={this.props.contentMap[content]} onlyContent={false}></Content>)
         }
         return (<div>{contents}</div>);
             
     }
 }
+
+const mapStateToProps = (state, ownProps) => {
+    return {
+        contentMap: state.updateModelReducer.content_map
+    }
+}
+export default connect(mapStateToProps)(browserContentPanel);
