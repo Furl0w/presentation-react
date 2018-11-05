@@ -1,7 +1,10 @@
 import React from 'react';
 import './editMetaSlid.css'
 
-export default class EditMetaSlid extends React.Component {
+import { connect } from 'react-redux'
+
+
+class EditMetaSlid extends React.Component {
     constructor(props) {
         super(props);
     }
@@ -29,3 +32,11 @@ export default class EditMetaSlid extends React.Component {
         );
     }
 }
+
+const mapStateToProps = (state, ownProps) => {
+    return {
+        title: state.selectedReducer.slid.title,
+        txt: state.selectedReducer.slid.txt
+    }
+}
+export default connect(mapStateToProps)(EditMetaSlid);

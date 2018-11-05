@@ -1,8 +1,10 @@
 import React from 'react';
 import Slid from '../../slid/containers/Slid'
 
+import { connect } from 'react-redux'
 
-export default class SlidList extends React.Component {
+
+class SlidList extends React.Component {
     constructor(props) {
         super(props);
     }
@@ -18,3 +20,11 @@ export default class SlidList extends React.Component {
         )
     }
 }
+
+const mapStateToProps = (state, ownProps) => {
+    return {
+        contentMap: state.updateModelReducer.content_map,
+        slidArray: state.updateModelReducer.presentation.slidArray
+    }
+}
+export default connect(mapStateToProps)(SlidList);

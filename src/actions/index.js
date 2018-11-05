@@ -18,3 +18,10 @@ export const updatePresentation = (pres) => {
         obj: pres
     }
 }
+
+export const updateSlid = (slid) => {
+    return {
+        type: 'UPDATE_PRESENTATION_SLIDS',
+        obj: slid
+    }
+}

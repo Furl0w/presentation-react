@@ -2,19 +2,21 @@ import React from 'react';
 import Slid from '../../common/slid/containers/Slid'
 
 import { connect } from 'react-redux'
+import { updateSlid } from '../../../actions'
 
 class EditSlidPanel extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-            selected_slid: this.props.selected_slid,
-            contentMap: this.props.contentMap
-        }
+        this.updateCurrentSlid = this.updateCurrentSlid.bind(this);
+    }
+
+    updateCurrentSlid(slid) {
+        this.props.dispatch(updateSlid(slid));
     }
 
     render() {
         if (Object.keys(this.props.selected_slid).length !== 0) {
-            return <Slid slid={this.props.selected_slid} contentMap={this.props.contentMap} displayMode={"FULL_MNG"}></Slid>
+            return <Slid slid={this.props.selected_slid} onChange={this.updateCurrentSlid} displayMode={"FULL_MNG"}></Slid>
         }
         else {
             return null

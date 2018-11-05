@@ -5,7 +5,10 @@ const updateModelReducer = (state = { presentation: {}, content_map: {} }, actio
         case 'UPDATE_PRESENTATION':
             return Object.assign({}, state, { presentation: action.obj })
         case 'UPDATE_PRESENTATION_SLIDS':
-            return; //TO DO
+            let newState = JSON.parse(JSON.stringify(state))
+            let indexUpdate = newState.presentation.slidArray.findIndex(e => e.id === action.obj.id)
+            newState.presentation.slidArray[indexUpdate] = action.obj
+            return newState;
         case 'UPDATE_CONTENT_MAP':
             return Object.assign({}, state, { content_map: action.obj })
         case 'ADD_CONTENT':
