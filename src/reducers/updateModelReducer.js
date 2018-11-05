@@ -3,12 +3,11 @@ const updateModelReducer = (state = { presentation: {}, content_map: {} }, actio
     console.log(action);
     switch (action.type) {
         case 'UPDATE_PRESENTATION':
-            return; //TO DO
+            return Object.assign({}, state, { presentation: action.obj })
         case 'UPDATE_PRESENTATION_SLIDS':
             return; //TO DO
         case 'UPDATE_CONTENT_MAP':
-            const newState1 = { content_map: action.obj };
-            return newState1;
+            return Object.assign({}, state, { content_map: action.obj })
         case 'ADD_CONTENT':
             return; //TO DO
         default:

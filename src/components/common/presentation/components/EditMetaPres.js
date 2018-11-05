@@ -1,7 +1,10 @@
 import React from 'react';
 import './editMetaPres.css'
 
-export default class EditMetaPres extends React.Component {
+import { connect } from 'react-redux'
+
+
+class EditMetaPres extends React.Component {
     constructor(props) {
         super(props);
     }
@@ -29,3 +32,11 @@ export default class EditMetaPres extends React.Component {
         );
     }
 }
+
+const mapStateToProps = (state, ownProps) => {
+    return {
+        title: state.updateModelReducer.presentation.title,
+        description: state.updateModelReducer.presentation.description
+    }
+}
+export default connect(mapStateToProps)(EditMetaPres);

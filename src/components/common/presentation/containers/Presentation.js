@@ -3,40 +3,44 @@ import SlidList from '../components/SlidList'
 import EditMetaPres from '../components/EditMetaPres'
 
 import { connect } from 'react-redux'
+import { updatePresentation } from '../../../../actions'
+
 
 class Presentation extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-            id:this.props.pres.id,
-            title:this.props.pres.title,
-            description:this.props.pres.description,
-            slidArray:this.props.pres.slidArray,
-        }
         this.handleChangeTitle = this.handleChangeTitle.bind(this);
         this.handleChangeDescription = this.handleChangeDescription.bind(this);
     }
 
     handleChangeTitle(e) {
-        this.setState({ title: e.target.value });
+        this.props.pres.title = e.target.value
+        this.props.dispatch(updatePresentation(this.props.pres));
     }
     handleChangeDescription(e) {
-        this.setState({ description: e.target.value });
+        this.props.pres.description = e.target.value
+        this.props.dispatch(updatePresentation(this.props.pres));
     }
 
     render() {
-        return(
-            <div>
-                <EditMetaPres title={this.state.title} handleChangeTitle={this.handleChangeTitle} description={this.state.description} handleChangeDescription={this.handleChangeDescription}></EditMetaPres>
-                <SlidList slidArray={this.state.slidArray} contentMap={this.props.contentMap}></SlidList>
-            </div>
-        )
+        if (Object.keys(this.props.contentMap).length !== 0) {
+            return (
+                <div>
+                    <EditMetaPres title={this.props.pres.title} handleChangeTitle={this.handleChangeTitle} description={this.props.pres.description} handleChangeDescription={this.handleChangeDescription}></EditMetaPres>
+                    <SlidList slidArray={this.props.pres.slidArray} contentMap={this.props.contentMap}></SlidList>
+                </div>
+            )
+        }
+        else {
+            return null
+        }
     }
 }
 
 const mapStateToProps = (state, ownProps) => {
     return {
-        contentMap: state.updateModelReducer.content_map
+        contentMap: state.updateModelReducer.content_map,
+        pres: state.updateModelReducer.presentation
     }
 }
 export default connect(mapStateToProps)(Presentation);

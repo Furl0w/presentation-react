@@ -11,3 +11,10 @@ export const updateContentMap = (contentMap) => {
         obj: contentMap
     }
 }
+
+export const updatePresentation = (pres) => {
+    return {
+        type: 'UPDATE_PRESENTATION',
+        obj: pres
+    }
+}
