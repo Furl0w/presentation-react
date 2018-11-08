@@ -11,9 +11,15 @@ export default class Content extends React.Component {
         }
     }
 
+    drag = function (e) {
+        e.dataTransfer.setData("text", e.target.id);
+    }
+
     render() {
         return (
-            <Visual content={this.state.content} onlyContent={this.state.onlyContent}></Visual>
+            <div draggable="true" onDragStart={(e) => this.onDragStart(e, t.name)}>
+                <Visual content={this.state.content} onlyContent={this.state.onlyContent}></Visual>
+            </div>
         )
     }
 }
