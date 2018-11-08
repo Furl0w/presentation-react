@@ -17,9 +17,9 @@ export default class Content extends React.Component {
 
     render() {
         return (
-            <div draggable="true" onDragStart={(e) => this.onDragStart(e, t.name)}>
+            /* <div draggable="true" onDragStart={(e) => this.onDragStart(e, t.name)}> */
                 <Visual content={this.state.content} onlyContent={this.state.onlyContent}></Visual>
-            </div>
+            /* </div> */
         )
     }
 }
