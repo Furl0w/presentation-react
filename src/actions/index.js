@@ -25,3 +25,10 @@ export const updateSlid = (slid) => {
         obj: slid
     }
 }
+
+export const updateDraggedElt = (slid) => {
+    return {
+        type: 'UPDATE_DRAGGED_ELT',
+        obj: slid
+    }
+}

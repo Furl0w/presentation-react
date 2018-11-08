@@ -3,7 +3,7 @@ import Content from '../../content/containers/Content'
 import EditMetaSlid from '../components/EditMetaSlid'
 
 import { connect } from 'react-redux';
-import { setSelectedSlid } from '../../../../actions'
+import { setSelectedSlid, updateDraggedElt } from '../../../../actions'
 
 class Slid extends React.Component {
     constructor(props) {
@@ -28,6 +28,15 @@ class Slid extends React.Component {
         this.props.dispatch(setSelectedSlid(tmpSlid));
     }
 
+    drop = function(e) {
+        e.preventDefault()
+        this.props.dispatch(updateDraggedElt(e.dataTransfer.getData("text")));
+    }
+
+    dragOver = function(e) {
+        e.preventDefault()
+    }
+
     render() {
         if (Object.keys(this.props.contentMap).length !== 0) {
             switch (this.props.displayMode) {
@@ -41,7 +50,9 @@ class Slid extends React.Component {
                 case "FULL_MNG": return (
                     <div>
                         <EditMetaSlid title={this.props.slid.title} handleChangeTitle={this.handleChangeTitle} txt={this.props.slid.txt} handleChangeTxt={this.handleChangeTxt}></EditMetaSlid>
-                        <Content key={this.props.contentMap[this.props.slid.content_id].id} content={this.props.contentMap[this.props.slid.content_id]} onlyContent={true}></Content>
+                        <div onDragOver={(e) => this.dragOver(e)} onDrop={(e) => this.drop(e, "complete")} className="droppable">
+                            <Content key={this.props.contentMap[this.props.slid.content_id].id} content={this.props.contentMap[this.props.slid.content_id]} onlyContent={true}></Content>
+                        </div>
                     </div>
                 )
                 default: return (
