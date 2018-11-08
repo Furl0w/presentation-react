@@ -1,10 +1,10 @@
 import React from 'react';
 import './Main.css';
 import '../../lib/bootstrap-3.3.7-dist/css/bootstrap.min.css';
-import * as contentMapTmp from '../../source/contentMap.json';
 import BrowserContentPanel from '../browseContentPanel/containers/browserContentPanel'
 import EditSlidPanel from '../editSlidPanel/containers/EditSlidPanel'
 import Presentation from '../common/presentation/containers/Presentation'
+import { Comm } from '../../services'
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import { updateContentMap, updatePresentation } from '../../actions'
@@ -33,8 +33,8 @@ export default class Main extends React.Component {
             description: "His palms are sweaty, knees weak, arms are heavy",
             slidArray: [slid1, slid2]
         }
-        store.dispatch(updateContentMap(contentMapTmp))
-        store.dispatch(updatePresentation(pres))
+        Comm.loadPres("efa0a79a-2f20-4e97-b0b7-71f824bfe349", (pres) => store.dispatch(updateContentMap(contentMapTmp)), (e) => console.log(e))
+        Comm.loadContent((contentMapTmp) => store.dispatch(updateContentMap(contentMapTmp)), (e) => console.log(e))
     }
 
     render() {
