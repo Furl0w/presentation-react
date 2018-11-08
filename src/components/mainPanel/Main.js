@@ -1,10 +1,10 @@
 import React from 'react';
 import './Main.css';
 import '../../lib/bootstrap-3.3.7-dist/css/bootstrap.min.css';
-import * as contentMapTmp from '../../source/contentMap.json';
 import BrowserContentPanel from '../browseContentPanel/containers/browserContentPanel'
 import EditSlidPanel from '../editSlidPanel/containers/EditSlidPanel'
 import Presentation from '../common/presentation/containers/Presentation'
+import Comm from '../../services/Comm'
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import { updateContentMap, updatePresentation } from '../../actions'
@@ -15,26 +15,9 @@ const store = createStore(globalReducer);
 export default class Main extends React.Component {
     constructor(props) {
         super(props);
-        let slid1 = {
-            id: 1,
-            title: "This is my first slide",
-            txt: "Play that funky music",
-            content_id: 2
-        }
-        let slid2 = {
-            id: 2,
-            title: "This is my second slide",
-            txt: "Ice Ice Baby",
-            content_id: 2
-        }
-        let pres = {
-            id: 1,
-            title: "This is my presentation",
-            description: "His palms are sweaty, knees weak, arms are heavy",
-            slidArray: [slid1, slid2]
-        }
-        store.dispatch(updateContentMap(contentMapTmp))
-        store.dispatch(updatePresentation(pres))
+        var comm = new Comm()
+        comm.loadPres("efa0a79a-2f20-4e97-b0b7-71f824bfe349", (pres) => store.dispatch(updatePresentation(pres)), (e) => console.log(e))
+        comm.loadContent((contentMapTmp) => store.dispatch(updateContentMap(contentMapTmp)), (e) => console.log(e))
     }
 
     render() {
