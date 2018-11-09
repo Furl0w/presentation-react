@@ -1,26 +1,18 @@
 import React from 'react';
 import Content from '../../common/content/containers/Content'
-
-import FloatingActionButton from 'material-ui/FloatingActionButton';
-import ContentAdd from 'material-ui/svg-icons/content/add';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
+import AddContentPanel from '../components/AddContentPanel';
 
 import { connect } from 'react-redux'
-
-const style = {
-    margin: 0,
-    top: 'auto',
-    right: 20,
-    bottom: 20,
-    left: 'auto',
-    position: 'fixed',
-};
 
 class browserContentPanel extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
         }
+    }
+
+    showAddDialog = function() {
+
     }
 
     render() {
@@ -31,11 +23,7 @@ class browserContentPanel extends React.Component {
         return (
             <div>
                 {contents}
-                <MuiThemeProvider>
-                    <FloatingActionButton mini style={style}>
-                        <ContentAdd />
-                    </FloatingActionButton>
-                </MuiThemeProvider>
+                <AddContentPanel/>
             </div>
         );
 
