@@ -1,16 +1,7 @@
 import React from 'react';
 import Slid from '../../slid/containers/Slid'
 
-import FloatingActionButton from 'material-ui/FloatingActionButton';
-import ContentAdd from 'material-ui/svg-icons/content/add';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
-
 import { connect } from 'react-redux'
-
-const style = {
-    marginRight: 20,
-};
-
 
 class SlidList extends React.Component {
     constructor(props) {
@@ -23,11 +14,6 @@ class SlidList extends React.Component {
         }
         return (
             <div>
-                <MuiThemeProvider>
-                    <FloatingActionButton mini style={style}>
-                        <ContentAdd />
-                    </FloatingActionButton>
-                </MuiThemeProvider>
                 {slids}
             </div>
         )
