@@ -14,9 +14,8 @@ class Comm {
         return '';
     }
 
-    static getUUID(callback, callbackErr) {
-        axios.get('/uuid')
-            .then(callback, callbackErr);
+    static getUUID() {
+        return axios.get('/uuid');
     }
 
     loadPres(presId, callback, callbackErr) {
