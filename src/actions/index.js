@@ -32,3 +32,10 @@ export const updateDraggedElt = (slid) => {
         obj: slid
     }
 }
+
+export const addContent = (content) => {
+    return {
+        type: 'ADD_CONTENT',
+        obj: content
+    }
+}

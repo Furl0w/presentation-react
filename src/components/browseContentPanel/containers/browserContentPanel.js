@@ -1,19 +1,16 @@
 import React from 'react';
 import Content from '../../common/content/containers/Content'
 import AddContentPanel from '../components/AddContentPanel';
+import { addContent } from '../../../actions/index';
 
 import { connect } from 'react-redux'
 
 class browserContentPanel extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-        }
     }
 
-    showAddDialog = function() {
-
-    }
+    addContentHandler = (content) => this.props.dispatch(addContent(JSON.parse(JSON.stringify(content))));
 
     render() {
         let contents = []
@@ -23,7 +20,7 @@ class browserContentPanel extends React.Component {
         return (
             <div>
                 {contents}
-                <AddContentPanel/>
+                <AddContentPanel addContentHandler={this.addContentHandler}/>
             </div>
         );
 
