@@ -16,10 +16,10 @@ export default class Main extends React.Component {
     constructor(props) {
         super(props);
 
-        var comm = new Comm();
-        comm.loadPres("efa0a79a-2f20-4e97-b0b7-71f824bfe349", pres => store.dispatch(updatePresentation(pres)), e => console.error(e))
-        comm.loadContent(contentMapTmp => store.dispatch(updateContentMap(contentMapTmp)), e => console.error(e))
-        /*
+        // var comm = new Comm();
+        // comm.loadPres("efa0a79a-2f20-4e97-b0b7-71f824bfe349", pres => store.dispatch(updatePresentation(pres)), e => console.error(e))
+        // comm.loadContent(contentMapTmp => store.dispatch(updateContentMap(contentMapTmp)), e => console.error(e))
+        
         let pres = 
         {
             "id": "efa0a79a-2f20-4e97-b0b7-71f824bfe349",
@@ -93,7 +93,7 @@ export default class Main extends React.Component {
             }
         }
         store.dispatch(updateContentMap(contentMapTmp));
-        */
+        
     }
 
     render() {

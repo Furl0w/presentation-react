@@ -24,7 +24,7 @@ export default class AddContentPanel extends React.Component {
         super(props);
         this.state = {
             title: "",
-            type: "image",
+            type: "img",
             src: "",
             open: false
         }
@@ -40,17 +40,15 @@ export default class AddContentPanel extends React.Component {
         }
 
         this.props.addContentHandler(content);
-        this.resetState();
         this.close();
     };
 
-    close = () => this.setState({ open: false });
-
-    resetState() {
+    close = () => {
         this.setState({
             title: "",
-            type: "image",
-            src: ""
+            type: "img",
+            src: "",
+            open: false
         });
     }
 
