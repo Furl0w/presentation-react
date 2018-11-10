@@ -4,8 +4,6 @@
 }
 
 .PresentationNavigation {
-    /*
-    */
     border-style: solid;
     border-width: 0px 1px 1px 1px;
     border-radius: 0px 0px 5px 5px;
@@ -26,4 +24,39 @@
 .Commands {
     display: flex;
     justify-content: center;
+    background-color: #F4F4F4;
+    margin-bottom: 10px;
+}
+
+.form-group {
+    margin-top:10px;
+}
+
+
+.SlidContent > img {
+    max-height: 200px;
+    max-width: 200px;
+    display: block;
+    margin: 0 auto;
+}
+
+.SlidMenu, .SlidContent {
+    cursor: pointer!important;
+    padding:5px;
+    transition: background-color 0.3s;
+}
+
+.SlidMenu:hover, .SlidContent:hover {
+    background-color:  #F4F4F4;
+}
+
+.SlidId {
+    font-style: italic;
+    font-size: xx-small;
+    margin:0
+}
+
+.SlidMenu {    
+    border-style: solid;
+    border-width: 0px 0px 2px;
 }

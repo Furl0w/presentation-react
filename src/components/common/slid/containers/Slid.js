@@ -41,8 +41,8 @@ class Slid extends React.Component {
         if (Object.keys(this.props.contentMap).length !== 0) {
             switch (this.props.displayMode) {
                 case "SHORT": return (
-                    <div onClick={this.updateSelectedSlid}>
-                        <h1>{this.props.slid.title}</h1>
+                    <div className="SlidMenu" onClick={this.updateSelectedSlid}>
+                        <h3>{this.props.slid.title}</h3>
                         <p>{this.props.slid.txt}</p>
                         <Content key={this.props.contentMap[this.props.slid.content_id].id} content={this.props.contentMap[this.props.slid.content_id]} onlyContent={true}></Content>
                     </div>

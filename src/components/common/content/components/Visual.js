@@ -21,23 +21,27 @@ export default class Visual extends React.Component {
             case "web": content = <iframe src={this.state.src}></iframe>; break
             default: return (
                 <div>
-                    <h4>Unsupported content type</h4>
+                    <b>Unsupported content type</b>
                 </div>
             )
         }
 
         if (this.state.onlyContent === true) {
             return (
-                <div>
+                <div className="SlidContent">
                     {content}
                 </div>
             );
         }
         else {
             return (
-                <div>
+                <div className="SlidContent">
                     {content}
-                    {this.state.id}{this.state.title}{this.state.src}
+                    <div>
+                        <p className="SlidId">{this.state.id}</p>
+                        <p className="SlidId">{this.state.src}</p>
+                        <p>{this.state.title}</p>
+                    </div>
                 </div>
             );
         }

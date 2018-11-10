@@ -26,7 +26,7 @@ export default class CommandButtons extends React.Component {
                     <IconButton tooltip="Add" >
                         <AddIcon color="#16a085"/>
                     </IconButton>
-                    <IconButton tooltip="Close" >
+                    <IconButton tooltip="Save" >
                         <SaveIcon color="#2980b9"/>
                     </IconButton>
                     <IconButton tooltip="Remove" >
