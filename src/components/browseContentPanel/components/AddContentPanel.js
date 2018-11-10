@@ -18,9 +18,6 @@ const style = {
 };
 
 
-/**
- * A modal dialog can only be closed by selecting one of the actions.
- */
 export default class AddContentPanel extends React.Component {
 
     constructor(props) {
@@ -45,14 +42,21 @@ export default class AddContentPanel extends React.Component {
         console.log("adding contenta",a)
 
         this.props.addContentHandler(a);
+        this.resetState();
         this.close();
     };
 
     close = () => this.setState({ open: false });
+    resetState(){
+        this.setState({title: ""});
+        this.setState({type: "image"});
+        this.setState({src: ""});
+    }
 
     handleChange = (event, index, value) => this.setState({type: value});
     handleChangeTitle = (event, value) => this.setState({title: value});
     handleChangeURL = (event, value) => this.setState({src: value});
+    
 
     render() {
         const actions = [

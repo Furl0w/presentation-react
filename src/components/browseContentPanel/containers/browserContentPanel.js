@@ -32,7 +32,7 @@ class browserContentPanel extends React.Component {
         // In prod
         Comm.getUUID()
             .then(data => {
-                content.id = data.uuid;
+                content.id = data.data.uuid;
                 this.props.dispatch(addContent(JSON.parse(JSON.stringify(content))))
             })
             .catch(console.error);         
