@@ -1,23 +1,19 @@
 import React from 'react';
 import SlidList from '../components/SlidList'
 import EditMetaPres from '../components/EditMetaPres'
+import CommandButtons from "../../../browsePresentationPanel/CommandButtons";
 
 import { connect } from 'react-redux'
 import { updatePresentation } from '../../../../actions'
 
 
 class Presentation extends React.Component {
-    constructor(props) {
-        super(props);
-        this.handleChangeTitle = this.handleChangeTitle.bind(this);
-        this.handleChangeDescription = this.handleChangeDescription.bind(this);
-    }
 
-    handleChangeTitle(e) {
+    handleChangeTitle = (e) => {
         this.props.pres.title = e.target.value
         this.props.dispatch(updatePresentation(this.props.pres));
     }
-    handleChangeDescription(e) {
+    handleChangeDescription = (e) => {
         this.props.pres.description = e.target.value
         this.props.dispatch(updatePresentation(this.props.pres));
     }
@@ -27,6 +23,7 @@ class Presentation extends React.Component {
             return (
                 <div>
                     <EditMetaPres title={this.props.pres.title} handleChangeTitle={this.handleChangeTitle} description={this.props.pres.description} handleChangeDescription={this.handleChangeDescription}></EditMetaPres>
+                    <CommandButtons/>
                     <SlidList slidArray={this.props.pres.slidArray} contentMap={this.props.contentMap}></SlidList>
                 </div>
             )

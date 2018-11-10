@@ -24,7 +24,7 @@ export default class AddContentPanel extends React.Component {
         super(props);
         this.state = {
             title: "",
-            type: "image",
+            type: "img",
             src: "",
             open: false
         }
@@ -33,30 +33,28 @@ export default class AddContentPanel extends React.Component {
     handleOpen = () => this.setState({ open: true });
 
     addContent = () => {
-        let a  = {
+        let content = {
             title: this.state.title,
             type: this.state.type,
             src: this.state.src
         }
 
-        console.log("adding contenta",a)
-
-        this.props.addContentHandler(a);
-        this.resetState();
+        this.props.addContentHandler(content);
         this.close();
     };
 
-    close = () => this.setState({ open: false });
-    resetState(){
-        this.setState({title: ""});
-        this.setState({type: "image"});
-        this.setState({src: ""});
+    close = () => {
+        this.setState({
+            title: "",
+            type: "img",
+            src: "",
+            open: false
+        });
     }
 
-    handleChange = (event, index, value) => this.setState({type: value});
-    handleChangeTitle = (event, value) => this.setState({title: value});
-    handleChangeURL = (event, value) => this.setState({src: value});
-    
+    handleChange = (event, index, value) => this.setState({ type: value });
+    handleChangeTitle = (event, value) => this.setState({ title: value });
+    handleChangeURL = (event, value) => this.setState({ src: value });
 
     render() {
         const actions = [
@@ -77,7 +75,7 @@ export default class AddContentPanel extends React.Component {
             <div>
                 <MuiThemeProvider>
                     <div>
-                        <FloatingActionButton mini style={style} onClick={this.handleOpen}>
+                        <FloatingActionButton style={style} onClick={this.handleOpen}>
                             <ContentAdd />
                         </FloatingActionButton>
                         <Dialog
@@ -85,6 +83,7 @@ export default class AddContentPanel extends React.Component {
                             actions={actions}
                             modal={true}
                             open={this.state.open}
+                            autoScrollBodyContent={true}
                         >
 
                             <TextField
@@ -94,7 +93,7 @@ export default class AddContentPanel extends React.Component {
                                 onChange={this.handleChangeTitle}
                             ></TextField>
 
-                            <br/>
+                            <br />
 
                             <SelectField
                                 floatingLabelText="Content Type"
@@ -106,8 +105,8 @@ export default class AddContentPanel extends React.Component {
                                 <MenuItem value={"video"} primaryText="video" />
                                 <MenuItem value={"web"} primaryText="web" />
                             </SelectField>
-                            
-                            <br/>
+
+                            <br />
 
                             <TextField
                                 id="src"

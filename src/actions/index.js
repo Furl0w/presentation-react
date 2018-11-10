@@ -39,3 +39,10 @@ export const addContent = (content) => {
         obj: content
     }
 }
+
+export const savePresentation = (pres) => {
+    return {
+        type: 'SAVE_PRESENTATION',
+        obj: pres
+    }
+}
