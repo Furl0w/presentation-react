@@ -21,6 +21,11 @@ const updateModelReducer = (state = { presentation: {}, content_map: {} }, actio
             newState1.content_map[action.obj.id] = action.obj;
             return newState1;
 
+        case 'ADD_SLID':
+            let newState2 = JSON.parse(JSON.stringify(state))
+            newState2.presentation.slidArray.push(action.obj);
+            return newState2;
+
         default:
             return state;
     }

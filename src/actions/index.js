@@ -46,3 +46,10 @@ export const savePresentation = (pres) => {
         obj: pres
     }
 }
+
+export const addSlid = (slid) => {
+    return {
+        type: 'ADD_SLID',
+        obj: slid
+    }
+}
