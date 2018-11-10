@@ -56,7 +56,6 @@ export default class AddContentPanel extends React.Component {
     handleChangeTitle = (event, value) => this.setState({ title: value });
     handleChangeURL = (event, value) => this.setState({ src: value });
 
-
     render() {
         const actions = [
             <FlatButton
@@ -76,7 +75,7 @@ export default class AddContentPanel extends React.Component {
             <div>
                 <MuiThemeProvider>
                     <div>
-                        <FloatingActionButton mini style={style} onClick={this.handleOpen}>
+                        <FloatingActionButton style={style} onClick={this.handleOpen}>
                             <ContentAdd />
                         </FloatingActionButton>
                         <Dialog
@@ -84,6 +83,7 @@ export default class AddContentPanel extends React.Component {
                             actions={actions}
                             modal={true}
                             open={this.state.open}
+                            autoScrollBodyContent={true}
                         >
 
                             <TextField

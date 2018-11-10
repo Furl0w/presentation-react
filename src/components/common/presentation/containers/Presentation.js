@@ -7,22 +7,18 @@ import { updatePresentation } from '../../../../actions'
 
 
 class Presentation extends React.Component {
-    constructor(props) {
-        super(props);
-        this.handleChangeTitle = this.handleChangeTitle.bind(this);
-        this.handleChangeDescription = this.handleChangeDescription.bind(this);
-    }
 
-    handleChangeTitle(e) {
+    handleChangeTitle = (e) => {
         this.props.pres.title = e.target.value
         this.props.dispatch(updatePresentation(this.props.pres));
     }
-    handleChangeDescription(e) {
+    handleChangeDescription = (e) => {
         this.props.pres.description = e.target.value
         this.props.dispatch(updatePresentation(this.props.pres));
     }
 
     render() {
+        console.log("p",this.props)
         if (Object.keys(this.props.contentMap).length !== 0) {
             return (
                 <div>
