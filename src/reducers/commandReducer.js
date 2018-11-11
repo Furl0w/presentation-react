@@ -1,8 +1,8 @@
-const commandReducer = (state = {}, action) => {
+const commandReducer = (state = { cmdPres: "" }, action) => {
     switch (action.type) {
-        case 'PLAY':
-            const newState1 = { slid: action.obj };
-            return newState1;
+
+        case 'COMMAND_PRESENTATION':
+            return { ...state, cmdPres: action.obj };
 
         default:
             return state;

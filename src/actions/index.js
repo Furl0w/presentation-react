@@ -54,9 +54,9 @@ export const removeSlid = (id) => {
     }
 }
 
-export const commandPresentation = (slid) => {
-    return {
-        type: 'test_SLID',
-        obj: slid
-    }
+export const sendCommand = (cmd) => {
+        return {
+            type: 'COMMAND_PRESENTATION',
+            obj: cmd
+        }
 }

@@ -20,7 +20,7 @@ export default class Main extends React.Component {
         // comm.loadPres("efa0a79a-2f20-4e97-b0b7-71f824bfe349", pres => store.dispatch(updatePresentation(pres)), e => console.error(e))
         // comm.loadContent(contentMapTmp => store.dispatch(updateContentMap(contentMapTmp)), e => console.error(e))
 
-        
+
 
         let contentMapTmp =
         {
@@ -62,7 +62,20 @@ export default class Main extends React.Component {
             ]
         }
         store.dispatch(updatePresentation(pres));
-    }
+
+
+        store.subscribe(() => {
+            this.setState({ presentation: store.getState().updateModelReducer.presentation });
+            this.setState({ contentMap: store.getState().updateModelReducer.content_map });
+
+            if (store.getState().commandReducer.cmdPres == 'CMD_SAVE') {
+                this.comm.savPres(store.getState().updateModelReducer.presentation, console.error);
+            }
+        });
+
+        // create the sokect connection between the server and the web browser
+        //this.comm.socketConnection(this.state.uuid);
+    }  
 
     render() {
         return (
