@@ -7,7 +7,7 @@ import EditSlidPanel from '../editSlidPanel/containers/EditSlidPanel'
 import Comm from '../../services/Comm'
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
-import { updateContentMap, updatePresentation } from '../../actions'
+import { updateContentMap, updatePresentation, addContent, sendCommand } from '../../actions'
 import globalReducer from '../../reducers';
 import BrowsePresentationPanel from '../browsePresentationPanel/browsePresentationPanel';
 
@@ -25,17 +25,8 @@ export default class Main extends React.Component {
 
         // create the sokect connection between the server and the web browser
         this.comm.socketConnection("test");
-
-        this.comm.loadPres("efa0a79a-2f20-4e97-b0b7-71f824bfe349", (pres) => {
-            console.log("presentation", pres);
-            store.dispatch(updatePresentation(pres))
-        }, console.error)
-
-
-        this.comm.loadContent(contentMapTmp => {
-            console.log("contentMap", contentMapTmp);
-            store.dispatch(updateContentMap(contentMapTmp))
-        }, console.error)
+        this.comm.loadPres("efa0a79a-2f20-4e97-b0b7-71f824bfe349", (pres) => store.dispatch(updatePresentation(pres)), console.error);
+        this.comm.loadContent(contentMapTmp => store.dispatch(updateContentMap(contentMapTmp)), console.error);
 
         /*
         let contentMapTmp =
@@ -79,14 +70,19 @@ export default class Main extends React.Component {
         }
         store.dispatch(updatePresentation(pres));
 */
-        
+
         store.subscribe(() => {
-            this.setState({ presentation: store.getState().updateModelReducer.presentation });
-            this.setState({ contentMap: store.getState().updateModelReducer.content_map });
-            
             let storeState = store.getState();
 
-            switch (storeState.commandReducer.cmdPres) {
+            this.setState({
+                presentation: storeState.updateModelReducer.presentation,
+                contentMap: storeState.updateModelReducer.content_map,                
+            });
+
+            let cmdPres = storeState.commandReducer.cmdPres,
+                params = storeState.commandReducer.params;
+
+            switch (cmdPres) {
                 case 'CMD_SAVE':
                     this.comm.savPres(storeState.updateModelReducer.presentation, console.error);
                     break;
@@ -113,6 +109,17 @@ export default class Main extends React.Component {
 
                 case 'cmd-last':
                     this.comm.end()
+                    break;
+
+                case 'save-content':
+                    console.log(cmdPres, params)
+                    if (params) {
+                        this.comm.savContent(params, (data) => {
+                            let content = { ...params, id: data.data.uuid };
+                            store.dispatch(sendCommand(''));    // Need to set cmdPres to null
+                            store.dispatch(addContent(content))
+                        });
+                    }
                     break;
 
                 default: break;
