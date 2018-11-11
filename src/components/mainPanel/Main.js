@@ -7,7 +7,7 @@ import EditSlidPanel from '../editSlidPanel/containers/EditSlidPanel'
 import Comm from '../../services/Comm'
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
-import { updateContentMap, updatePresentation, addContent, sendCommand } from '../../actions'
+import { updateContentMap, updatePresentation, addContent, sendCommand, setSelectedSlid } from '../../actions'
 import globalReducer from '../../reducers';
 import BrowsePresentationPanel from '../browsePresentationPanel/browsePresentationPanel';
 
@@ -17,13 +17,13 @@ export default class Main extends React.Component {
     constructor(props) {
         super(props);
 
-        this.comm = new Comm();
         this.state = {
             contentMap: {},
             currentPres: {}
         }
 
         // create the sokect connection between the server and the web browser
+        this.comm = new Comm();
         this.comm.socketConnection("test");
         this.comm.loadPres("efa0a79a-2f20-4e97-b0b7-71f824bfe349", (pres) => store.dispatch(updatePresentation(pres)), console.error);
         this.comm.loadContent(contentMapTmp => store.dispatch(updateContentMap(contentMapTmp)), console.error);
@@ -74,13 +74,18 @@ export default class Main extends React.Component {
         store.subscribe(() => {
             let storeState = store.getState();
 
+            /*
             this.setState({
                 presentation: storeState.updateModelReducer.presentation,
                 contentMap: storeState.updateModelReducer.content_map,                
             });
+            */
 
             let cmdPres = storeState.commandReducer.cmdPres,
-                params = storeState.commandReducer.params;
+                params = storeState.commandReducer.params,                
+                crtSlid = storeState.selectedReducer.slid;
+
+
 
             switch (cmdPres) {
                 case 'CMD_SAVE':
@@ -88,11 +93,33 @@ export default class Main extends React.Component {
                     break;
 
                 case 'cmd-prev':
-                    this.comm.backward()
+                    let prevPos = storeState.updateModelReducer.presentation.slidArray.findIndex(slid => slid.id === crtSlid.id);
+
+                    if (prevPos > 0) {
+                        let prevSlid = storeState.updateModelReducer.presentation.slidArray[prevPos - 1]
+                        this.comm.emit(prevSlid);
+                        this.comm.backward();
+                        store.dispatch(sendCommand(''));
+                        store.dispatch(setSelectedSlid(prevSlid));
+                    }
+                    else {
+                        store.dispatch(sendCommand(''));
+                    }
                     break;
 
                 case 'cmd-next':
-                    this.comm.forward()
+                    let pos = storeState.updateModelReducer.presentation.slidArray.findIndex(slid => slid.id === crtSlid.id);
+                    console.log("pos", pos, crtSlid, storeState.selectedReducer)
+                    if (pos > 0) {
+                        let nextSlid = storeState.updateModelReducer.presentation.slidArray[pos + 1]
+                        console.log("slid", nextSlid)
+                        this.comm.emit(nextSlid);
+                        store.dispatch(sendCommand(''));
+                        store.dispatch(setSelectedSlid(nextSlid));
+                    }
+                    else {
+                        store.dispatch(sendCommand(''));
+                    }
                     break;
 
                 case 'cmd-play':
@@ -116,7 +143,7 @@ export default class Main extends React.Component {
                     if (params) {
                         this.comm.savContent(params, (data) => {
                             let content = { ...params, id: data.data.uuid };
-                            store.dispatch(sendCommand(''));    // Need to set cmdPres to null
+                            store.dispatch(sendCommand('CMD_SAVE'));
                             store.dispatch(addContent(content))
                         });
                     }

@@ -12,7 +12,6 @@ class Comm {
         this.comm = {};
         this.comm.io = {};
         this.socket = "";
-
     }
 
     toString = () => {
@@ -124,6 +123,11 @@ class Comm {
         this.socket.on('slidEvent', function (socket) {
 
         });
+    }
+
+    emit = (slid) => {
+        console.log("emiting", this.socket, slid)
+        this.socket.emit('slidEvent', { 'slid': slid });
     }
 
     backward = () => {
