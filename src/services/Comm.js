@@ -6,7 +6,6 @@ class Comm {
         this.comm = {};
         this.comm.io = {};
         this.socket = "";
-        this.emitOnConnect = this.emitOnConnect.bind(this);
 
     }
 
@@ -22,14 +21,11 @@ class Comm {
         axios.get('/loadPres')
             .then(function (data) {
                 var size = Object.keys(data.data).length;
-                console.log("raw data");
-                console.log(data.data);
+                console.log("raw data", data.data);
                 let loadedPres = ""
                 if (size > 0) {
-                    console.log("key");
-                    console.log(Object.keys(data.data)[0]);
-                    console.log("data");
-                    console.log(data.data[Object.keys(data.data)[0]]);
+                    console.log("key", Object.keys(data.data)[0]);
+                    console.log("data", data.data[Object.keys(data.data)[0]]);
                     loadedPres = data.data[Object.keys(data.data)[0]];
                 }
                 callback(loadedPres);
@@ -96,20 +92,18 @@ class Comm {
     }
 
     emitOnConnect = (message) => {
-        console.log("message");
-        console.log("socket");
-        console.log(this.socket);
-        console.log("this.comm.io.uuid");
-        console.log(this.comm.io.uuid);
+        console.log("message", message);
+        console.log("socket", this.socket);
+        console.log("this.comm.io.uuid", this.comm.io.uuid);
         this.socket.emit('data_comm', { 'id': this.comm.io.uuid }, function (test) {
-            console.log(test);
+            console.log("emitOnConnect", test);
         });
     }
 
     socketConnection = (uuid) => {
         this.socket = io.connect(process.env.SOCKET_URL);
         this.comm.io.uuid = uuid;
-        this.socket.on('connection', message => { this.emitOnConnect(message) });
+        this.socket.on('connection', message => this.emitOnConnect(message));
 
         this.socket.on('newPres', function (socket) {
 

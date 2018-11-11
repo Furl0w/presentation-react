@@ -18,11 +18,26 @@ export default class Main extends React.Component {
         super(props);
 
         this.comm = new Comm();
-        // comm.loadPres("efa0a79a-2f20-4e97-b0b7-71f824bfe349", pres => store.dispatch(updatePresentation(pres)), e => console.error(e))
-        // comm.loadContent(contentMapTmp => store.dispatch(updateContentMap(contentMapTmp)), e => console.error(e))
+        this.state = {
+            contentMap: {},
+            currentPres: {}
+        }
+
+        // create the sokect connection between the server and the web browser
+        this.comm.socketConnection("test");
+
+        this.comm.loadPres("efa0a79a-2f20-4e97-b0b7-71f824bfe349", (pres) => {
+            console.log("presentation", pres);
+            store.dispatch(updatePresentation(pres))
+        }, console.error)
 
 
+        this.comm.loadContent(contentMapTmp => {
+            console.log("contentMap", contentMapTmp);
+            store.dispatch(updateContentMap(contentMapTmp))
+        }, console.error)
 
+        /*
         let contentMapTmp =
         {
             "62cf58dd-ecb1-495a-899c-b7c633fa1df7": {
@@ -63,12 +78,12 @@ export default class Main extends React.Component {
             ]
         }
         store.dispatch(updatePresentation(pres));
-
-
+*/
+        
         store.subscribe(() => {
             this.setState({ presentation: store.getState().updateModelReducer.presentation });
             this.setState({ contentMap: store.getState().updateModelReducer.content_map });
-
+            /*
             let storeState = store.getState();
 
             switch (storeState.commandReducer.cmdPres) {
@@ -102,14 +117,8 @@ export default class Main extends React.Component {
 
                 default: break;
             }
+            */
         });
-
-        // create the sokect connection between the server and the web browser
-        //this.comm.socketConnection(this.state.uuid);
-    }
-
-    sendCommand = (cmd) => {
-
     }
 
     render() {

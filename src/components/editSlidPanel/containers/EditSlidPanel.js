@@ -28,7 +28,7 @@ class EditSlidPanel extends React.Component {
 }
 const mapStateToProps = (state, ownProps) => {
 
-    if (state.updateModelReducer.presentation.slidArray.find(slid => slid.id === state.selectedReducer.slid.id)) {
+    if (state.updateModelReducer.presentation.slidArray && state.updateModelReducer.presentation.slidArray.find(slid => slid.id === state.selectedReducer.slid.id)) {
         return {
             selected_slid: state.selectedReducer.slid
         }
