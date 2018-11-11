@@ -10,7 +10,8 @@ class SlidList extends React.Component {
 
             let slids = [];
             for (let slid of this.props.slidArray) {
-                slids.push(<Slid key={slid.id} slid={slid} contentMap={this.props.contentMap} displayMode={"SHORT"}></Slid>)
+                let selected = this.props.selSlidID && slid.id === this.props.selSlidID;
+                slids.push(<Slid key={slid.id} slid={slid} contentMap={this.props.contentMap} displayMode={"SHORT"} selected={selected}></Slid>)
             }
             return (
                 <div>
@@ -27,7 +28,8 @@ class SlidList extends React.Component {
 const mapStateToProps = (state, ownProps) => {
     return {
         contentMap: state.updateModelReducer.content_map,
-        slidArray: state.updateModelReducer.presentation.slidArray
+        slidArray: state.updateModelReducer.presentation.slidArray,
+        selSlidID: state.selectedReducer.slid.id
     }
 }
 export default connect(mapStateToProps)(SlidList);
