@@ -6,8 +6,8 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import { connect } from 'react-redux'
 
 
-class EditMetaSlid extends React.Component {
-    
+export default class EditMetaSlid extends React.Component {
+
     render() {
         return (
             <MuiThemeProvider>
@@ -34,11 +34,3 @@ class EditMetaSlid extends React.Component {
         );
     }
 }
-
-const mapStateToProps = (state, ownProps) => {
-    return {
-        title: state.selectedReducer.slid.title,
-        txt: state.selectedReducer.slid.txt
-    }
-}
-export default connect(mapStateToProps)(EditMetaSlid);

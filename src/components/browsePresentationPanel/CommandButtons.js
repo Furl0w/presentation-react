@@ -33,7 +33,7 @@ export default class CommandButtons extends React.Component {
                         <RemoveIcon color="#e74c3c"/>
                     </IconButton>
                 </div>
-            </MuiThemeProvider >
+            </MuiThemeProvider>
         );
     }
 }

@@ -6,7 +6,7 @@ import EditSlidPanel from '../editSlidPanel/containers/EditSlidPanel'
 import Comm from '../../services/Comm'
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
-import { updateContentMap, updatePresentation } from '../../actions'
+import { updateContentMap, updatePresentation, setSelectedSlid } from '../../actions'
 import globalReducer from '../../reducers';
 import BrowsePresentationPanel from '../browsePresentationPanel/browsePresentationPanel';
 
@@ -19,6 +19,27 @@ export default class Main extends React.Component {
         // var comm = new Comm();
         // comm.loadPres("efa0a79a-2f20-4e97-b0b7-71f824bfe349", pres => store.dispatch(updatePresentation(pres)), e => console.error(e))
         // comm.loadContent(contentMapTmp => store.dispatch(updateContentMap(contentMapTmp)), e => console.error(e))
+
+        
+
+        let contentMapTmp =
+        {
+            "62cf58dd-ecb1-495a-899c-b7c633fa1df7": {
+                "type": "img",
+                "id": "62cf58dd-ecb1-495a-899c-b7c633fa1df7",
+                "title": "Lego",
+                "fileName": "62cf58dd-ecb1-495a-899c-b7c633fa1df7.jpg",
+                "src": "https://i.imgur.com/SBUbHHN.gif"
+            },
+            "e336147f-e6e1-42a7-9766-e9a9dc34ceef": {
+                "type": "video",
+                "id": "e336147f-e6e1-42a7-9766-e9a9dc34ceef",
+                "title": "test url",
+                "fileName": null,
+                "src": "https://www.youtube.com/watch?v=fAVCSU9vrvY"
+            }
+        }
+        store.dispatch(updateContentMap(contentMapTmp));
 
         let pres =
         {
@@ -41,26 +62,6 @@ export default class Main extends React.Component {
             ]
         }
         store.dispatch(updatePresentation(pres));
-
-        let contentMapTmp =
-        {
-            "62cf58dd-ecb1-495a-899c-b7c633fa1df7": {
-                "type": "img",
-                "id": "62cf58dd-ecb1-495a-899c-b7c633fa1df7",
-                "title": "Lego",
-                "fileName": "62cf58dd-ecb1-495a-899c-b7c633fa1df7.jpg",
-                "src": "https://i.imgur.com/SBUbHHN.gif"
-            },
-            "e336147f-e6e1-42a7-9766-e9a9dc34ceef": {
-                "type": "video",
-                "id": "e336147f-e6e1-42a7-9766-e9a9dc34ceef",
-                "title": "test url",
-                "fileName": null,
-                "src": "https://www.youtube.com/watch?v=fAVCSU9vrvY"
-            }
-        }
-        store.dispatch(updateContentMap(contentMapTmp));
-
     }
 
     render() {

@@ -47,9 +47,16 @@ export const addSlid = (slid) => {
     }
 }
 
-export const removeSlid = (slid) => {
+export const removeSlid = (id) => {
     return {
         type: 'REMOVE_SLID',
+        obj: id
+    }
+}
+
+export const commandPresentation = (slid) => {
+    return {
+        type: 'test_SLID',
         obj: slid
     }
 }

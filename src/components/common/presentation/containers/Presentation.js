@@ -48,7 +48,7 @@ class Presentation extends React.Component {
             */
     }
 
-    handleDelSlid = (e) => this.props.dispatch(removeSlid(this.props.selectedSlid));
+    handleDelSlid = (e) => this.props.dispatch(removeSlid(this.props.selectedSlid.id));
 
     render() {
         if (Object.keys(this.props.contentMap).length !== 0) {
