@@ -6,7 +6,7 @@ import CommandButtons from "../../../browsePresentationPanel/CommandButtons";
 import { connect } from 'react-redux'
 import { updatePresentation } from '../../../../actions'
 import { addSlid, removeSlid, sendCommand } from "../../../../actions";
-import generateUUID from "../../../../tools/tools";
+import Comm from "../../../../services/Comm";
 
 
 class Presentation extends React.Component {
@@ -21,23 +21,12 @@ class Presentation extends React.Component {
     }
 
     handleAddSlid = (e) => {
-
-        let newSlid = {
-            id: generateUUID(),  // In dev;
-            content_id: "62cf58dd-ecb1-495a-899c-b7c633fa1df7",
-            title: "New Slide",
-            txt: "Some nice content",
-        };
-
-        this.props.dispatch(addSlid(newSlid));
-
-        // In prod
-        /*
+        
         Comm.getUUID()
             .then(data => {
                 let newSlid = {
-                    id: data.data.uuid
-                    content_id: "",
+                    id: data.data.uuid,
+                    content_id: "62cf58dd-ecb1-495a-899c-b7c633fa1df7",
                     title: "New Slide",
                     txt: "Some nice content"
                 };
@@ -45,7 +34,6 @@ class Presentation extends React.Component {
                 this.props.dispatch(addSlid(newSlid));
             })
             .catch(console.error);
-            */
     }
 
     handleDelSlid = (e) => this.props.dispatch(removeSlid(this.props.selectedSlid.id));

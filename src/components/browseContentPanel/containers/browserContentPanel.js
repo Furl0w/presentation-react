@@ -9,24 +9,7 @@ import { connect } from 'react-redux'
 
 class browserContentPanel extends React.Component {
 
-    addContentHandler = (content) => {
-        
-        // In dev
-        //content.id = generateUUID();         
-        //this.props.dispatch(addContent(JSON.parse(JSON.stringify(content))))
-
-        this.props.dispatch(sendCommand('save-content', content));
-
-        // In prod
-        /*
-        Comm.getUUID()
-            .then(data => {
-                content.id = data.data.uuid;
-                this.props.dispatch(addContent(JSON.parse(JSON.stringify(content))))
-            })
-            .catch(console.error); 
-            */        
-    };
+    addContentHandler = (content) => this.props.dispatch(sendCommand('save-content', content));
 
     render() {
         let contents = []

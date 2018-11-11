@@ -152,7 +152,6 @@ export default class Main extends React.Component {
                     break;
 
                 case 'save-content':
-                    console.log(cmdPres, params)
                     if (params) {
                         this.comm.savContent(params, (data) => {
                             let content = { ...params, id: data.data.uuid };

@@ -7,7 +7,7 @@ const config = {
     }
 }
 
-class Comm {
+export default class Comm {
     constructor() {
         this.comm = {};
         this.comm.io = {};
@@ -154,5 +154,3 @@ class Comm {
     }
 
 }
-
-module.exports = Comm;
