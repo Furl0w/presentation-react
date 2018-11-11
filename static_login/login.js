@@ -12,13 +12,17 @@ function tryLogin() {
         document.getElementById("errorMessage").style.display = "none";
         credentials = JSON.stringify({ login: user, pwd: password })
         postRequest(credentials, 'http://localhost:1337/login', (e, data) => {
-            console.log("e : " + e)
-            console.log("data : " +data)
-            if(e !== null){
+            if (e !== null) {
                 document.getElementById("wrongLogin").style.display = "inline";
             }
             else {
-                window.location.href = "http://localhost:1337/admin"
+                data = JSON.parse(data)
+                if(data.role  === "Admin"){
+                    window.location.href = "http://localhost:1337/admin"
+                }
+                if(data.role === "User"){
+                    window.location.href = "http://localhost:1337/watch"
+                }
             }
         })
     }
@@ -31,7 +35,6 @@ function postRequest(obj, url, cb) {
     xhr.setRequestHeader("Content-Type", "application/json");
 
     xhr.onreadystatechange = function () {
-        console.log(this.status)
         if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
             cb(null, this.response)
         }
