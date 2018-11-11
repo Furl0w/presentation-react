@@ -26,13 +26,6 @@ export const updateSlid = (slid) => {
     }
 }
 
-export const updateDraggedElt = (slid) => {
-    return {
-        type: 'UPDATE_DRAGGED_ELT',
-        obj: slid
-    }
-}
-
 export const addContent = (content) => {
     return {
         type: 'ADD_CONTENT',

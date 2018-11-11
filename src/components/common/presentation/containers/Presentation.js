@@ -24,13 +24,12 @@ class Presentation extends React.Component {
 
         let newSlid = {
             id: generateUUID(),  // In dev;
-            content_id: "",
+            content_id: "62cf58dd-ecb1-495a-899c-b7c633fa1df7",
             title: "New Slide",
-            txt: "Some nice content"
+            txt: "Some nice content",
         };
 
         this.props.dispatch(addSlid(newSlid));
-
 
         // In prod
         /*
