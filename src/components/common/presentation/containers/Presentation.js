@@ -5,7 +5,7 @@ import CommandButtons from "../../../browsePresentationPanel/CommandButtons";
 
 import { connect } from 'react-redux'
 import { updatePresentation } from '../../../../actions'
-import { addSlid } from "../../../../actions";
+import { addSlid, removeSlid } from "../../../../actions";
 import generateUUID from "../../../../tools/tools";
 
 
@@ -48,12 +48,14 @@ class Presentation extends React.Component {
             */
     }
 
+    handleDelSlid = (e) => this.props.dispatch(removeSlid(this.props.selectedSlid));
+
     render() {
         if (Object.keys(this.props.contentMap).length !== 0) {
             return (
                 <div>
                     <EditMetaPres title={this.props.pres.title} handleChangeTitle={this.handleChangeTitle} description={this.props.pres.description} handleChangeDescription={this.handleChangeDescription}></EditMetaPres>
-                    <CommandButtons addSlid={this.handleAddSlid} />
+                    <CommandButtons addSlid={this.handleAddSlid} removeSlid={this.handleDelSlid} />
                     <SlidList slidArray={this.props.pres.slidArray} contentMap={this.props.contentMap}></SlidList>
                 </div>
             )
@@ -67,7 +69,9 @@ class Presentation extends React.Component {
 const mapStateToProps = (state, ownProps) => {
     return {
         contentMap: state.updateModelReducer.content_map,
-        pres: state.updateModelReducer.presentation
+        pres: state.updateModelReducer.presentation,
+        selectedSlid: state.selectedReducer.slid
     }
 }
+
 export default connect(mapStateToProps)(Presentation);

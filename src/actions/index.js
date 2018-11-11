@@ -46,3 +46,10 @@ export const addSlid = (slid) => {
         obj: slid
     }
 }
+
+export const removeSlid = (slid) => {
+    return {
+        type: 'REMOVE_SLID',
+        obj: slid
+    }
+}

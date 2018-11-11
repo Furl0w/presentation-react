@@ -26,6 +26,13 @@ const updateModelReducer = (state = { presentation: {}, content_map: {} }, actio
             newState2.presentation.slidArray.push(action.obj);
             return newState2;
 
+        case 'REMOVE_SLID':
+            let index = state.presentation.slidArray.indexOf(action.obj);
+            if (index > -1) {
+                state.presentation.slidArray.splice(index, 1);
+            }
+            return JSON.parse(JSON.stringify(state));
+
         default:
             return state;
     }

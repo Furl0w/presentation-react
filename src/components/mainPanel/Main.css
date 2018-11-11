@@ -47,6 +47,10 @@
     transition: background-color 0.3s;
 }
 
+iframe, object {
+    cursor: pointer!important;
+}
+
 .SlidMenu:hover, .SlidContent:hover {
     background-color:  #F4F4F4;
 }
