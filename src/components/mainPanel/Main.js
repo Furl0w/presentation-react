@@ -95,10 +95,10 @@ export default class Main extends React.Component {
                     let prevPos = slidArray.findIndex(slid => slid.id === crtSlid.id);
 
                     if (prevPos > 0) {
-                        let prevSlid = slidArray[prevPos - 1]
-                        this.comm.emit(prevSlid);
+                        let nextSlid = slidArray[prevPos - 1]
+                        this.comm.emit(nextSlid);
                         store.dispatch(sendCommand(''));
-                        store.dispatch(setSelectedSlid(prevSlid));
+                        store.dispatch(setSelectedSlid(nextSlid));
                     }
                     else {
                         store.dispatch(sendCommand(''));
@@ -124,15 +124,31 @@ export default class Main extends React.Component {
                     break;
 
                 case 'cmd-pause':
-                    this.comm.pause()
+                    //this.comm.pause()
                     break;
 
                 case 'cmd-first':
-                    this.comm.begin()
+                    if (slidArray.length > 0) {
+                        let nextSlid = slidArray[0]
+                        this.comm.emit(nextSlid);
+                        store.dispatch(sendCommand(''));
+                        store.dispatch(setSelectedSlid(nextSlid));
+                    }
+                    else {
+                        store.dispatch(sendCommand(''));
+                    }
                     break;
 
                 case 'cmd-last':
-                    this.comm.end()
+                    if (slidArray.length > 0) {
+                        let nextSlid = slidArray[slidArray.length-1]
+                        this.comm.emit(nextSlid);
+                        store.dispatch(sendCommand(''));
+                        store.dispatch(setSelectedSlid(nextSlid));
+                    }
+                    else {
+                        store.dispatch(sendCommand(''));
+                    }
                     break;
 
                 case 'save-content':
