@@ -1,4 +1,3 @@
-
 // DEV
 export default function generateUUID() {
     var d = new Date().getTime();

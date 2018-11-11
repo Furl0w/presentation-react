@@ -4,9 +4,7 @@ import Slid from '../../slid/containers/Slid'
 import { connect } from 'react-redux'
 
 class SlidList extends React.Component {
-    constructor(props) {
-        super(props);
-    }
+    
     render() {
         let slids = []
         for (let slid of this.props.slidArray) {

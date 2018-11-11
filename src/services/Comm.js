@@ -10,7 +10,7 @@ class Comm {
 
     }
 
-    toString() {
+    toString = () => {
         return '';
     }
 
@@ -18,7 +18,7 @@ class Comm {
         return axios.get('/uuid');
     }
 
-    loadPres(presId, callback, callbackErr) {
+    loadPres = (presId, callback, callbackErr) => {
         axios.get('/loadPres')
             .then(function (data) {
                 var size = Object.keys(data.data).length;
@@ -40,7 +40,7 @@ class Comm {
 
     }
 
-    loadContent(callback, callbackErr) {
+    loadContent = (callback, callbackErr) => {
         axios.get('/contents')
             .then(function (data) {
                 //console.log("raw content data");
@@ -61,7 +61,7 @@ class Comm {
 
     }
 
-    savPres(presJson, callbackErr) {
+    savPres = (presJson, callbackErr) => {
         axios.post('/savePres', presJson)
             .then(function (response) {
                 console.log(response);
@@ -71,7 +71,7 @@ class Comm {
             });
     }
 
-    savContent(contentJson, callbackErr) {
+    savContent = (contentJson, callbackErr) => {
         axios.post('/addContent', contentJson)
             .then(function (response) {
                 console.log(response);
@@ -81,7 +81,7 @@ class Comm {
             });
     }
 
-    fileUpload(fileC, callback, callbackErr) {
+    fileUpload = (fileC, callback, callbackErr) => {
         var data = new FormData();
         data.append('file', fileC);
         axios.post('/file-upload', data)
@@ -95,7 +95,7 @@ class Comm {
 
     }
 
-    emitOnConnect(message) {
+    emitOnConnect = (message) => {
         console.log("message");
         console.log("socket");
         console.log(this.socket);
@@ -106,7 +106,7 @@ class Comm {
         });
     }
 
-    socketConnection(uuid) {
+    socketConnection = (uuid) => {
         this.socket = io.connect(process.env.SOCKET_URL);
         this.comm.io.uuid = uuid;
         this.socket.on('connection', message => { this.emitOnConnect(message) });
@@ -119,27 +119,27 @@ class Comm {
         });
     }
 
-    backward() {
+    backward = () => {
         this.socket.emit('slidEvent', { 'CMD': "PREV" });
     }
 
-    forward() {
+    forward = () => {
         this.socket.emit('slidEvent', { 'CMD': "NEXT" });
     }
 
-    play(presUUID) {
+    play = (presUUID) => {
         this.socket.emit('slidEvent', { 'CMD': "START", 'PRES_ID': presUUID });
     }
 
-    pause() {
+    pause = () => {
         this.socket.emit('slidEvent', { 'CMD': "PAUSE" });
     }
 
-    begin() {
+    begin = () => {
         this.socket.emit('slidEvent', { 'CMD': "BEGIN" });
     }
 
-    end() {
+    end = () => {
         this.socket.emit('slidEvent', { 'CMD': "END" });
     }
 

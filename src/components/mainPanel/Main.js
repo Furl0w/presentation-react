@@ -1,4 +1,5 @@
 import React from 'react';
+
 import './Main.css';
 import '../../lib/bootstrap-3.3.7-dist/css/bootstrap.min.css';
 import BrowserContentPanel from '../browseContentPanel/containers/browserContentPanel';
@@ -6,7 +7,7 @@ import EditSlidPanel from '../editSlidPanel/containers/EditSlidPanel'
 import Comm from '../../services/Comm'
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
-import { updateContentMap, updatePresentation, setSelectedSlid } from '../../actions'
+import { updateContentMap, updatePresentation } from '../../actions'
 import globalReducer from '../../reducers';
 import BrowsePresentationPanel from '../browsePresentationPanel/browsePresentationPanel';
 
@@ -16,7 +17,7 @@ export default class Main extends React.Component {
     constructor(props) {
         super(props);
 
-        // var comm = new Comm();
+        this.comm = new Comm();
         // comm.loadPres("efa0a79a-2f20-4e97-b0b7-71f824bfe349", pres => store.dispatch(updatePresentation(pres)), e => console.error(e))
         // comm.loadContent(contentMapTmp => store.dispatch(updateContentMap(contentMapTmp)), e => console.error(e))
 
@@ -68,14 +69,48 @@ export default class Main extends React.Component {
             this.setState({ presentation: store.getState().updateModelReducer.presentation });
             this.setState({ contentMap: store.getState().updateModelReducer.content_map });
 
-            if (store.getState().commandReducer.cmdPres == 'CMD_SAVE') {
-                this.comm.savPres(store.getState().updateModelReducer.presentation, console.error);
+            let storeState = store.getState();
+
+            switch (storeState.commandReducer.cmdPres) {
+                case 'CMD_SAVE':
+                    this.comm.savPres(storeState.updateModelReducer.presentation, console.error);
+                    break;
+
+                case 'cmd-prev':
+                    this.comm.backward()
+                    break;
+
+                case 'cmd-next':
+                    this.comm.forward()
+                    break;
+
+                case 'cmd-play':
+                    this.comm.play(storeState.updateModelReducer.presentation.id)
+                    break;
+
+                case 'cmd-pause':
+                    this.comm.pause()
+                    break;
+
+                case 'cmd-first':
+                    this.comm.begin()
+                    break;
+
+                case 'cmd-last':
+                    this.comm.end()
+                    break;
+
+                default: break;
             }
         });
 
         // create the sokect connection between the server and the web browser
         //this.comm.socketConnection(this.state.uuid);
-    }  
+    }
+
+    sendCommand = (cmd) => {
+
+    }
 
     render() {
         return (
@@ -86,7 +121,7 @@ export default class Main extends React.Component {
                             <BrowsePresentationPanel></BrowsePresentationPanel>
                         </div>
                         <div className='col-md-6 col-lg-6 height-100'>
-                            <EditSlidPanel></EditSlidPanel>
+                            <EditSlidPanel ></EditSlidPanel>
                         </div>
                         <div className='col-md-3 col-lg-3 height-100'>
                             <BrowserContentPanel></BrowserContentPanel>
