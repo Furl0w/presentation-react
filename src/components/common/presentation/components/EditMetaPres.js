@@ -7,9 +7,7 @@ import { connect } from 'react-redux'
 
 
 class EditMetaPres extends React.Component {
-    constructor(props) {
-        super(props);
-    }
+    
     render() {
         return (
             <MuiThemeProvider>

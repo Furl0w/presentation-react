@@ -4,19 +4,23 @@ import Slid from '../../slid/containers/Slid'
 import { connect } from 'react-redux'
 
 class SlidList extends React.Component {
-    constructor(props) {
-        super(props);
-    }
+
     render() {
-        let slids = []
-        for (let slid of this.props.slidArray) {
-            slids.push(<Slid key={slid.id} slid={slid} contentMap={this.props.contentMap} displayMode={"SHORT"}></Slid>)
+        if (this.props.slidArray) {
+
+            let slids = [];
+            for (let slid of this.props.slidArray) {
+                slids.push(<Slid key={slid.id} slid={slid} contentMap={this.props.contentMap} displayMode={"SHORT"}></Slid>)
+            }
+            return (
+                <div>
+                    {slids}
+                </div>
+            )
         }
-        return (
-            <div>
-                {slids}
-            </div>
-        )
+        else {
+            return (<div></div>)
+        }
     }
 }
 

@@ -3,7 +3,7 @@ import Content from '../../content/containers/Content'
 import EditMetaSlid from '../components/EditMetaSlid'
 
 import { connect } from 'react-redux';
-import { setSelectedSlid, updateDraggedElt } from '../../../../actions'
+import { setSelectedSlid } from '../../../../actions'
 
 class Slid extends React.Component {
     

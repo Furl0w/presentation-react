@@ -5,6 +5,7 @@ import AddIcon from 'material-ui/svg-icons/av/add-to-queue';
 import SaveIcon from 'material-ui/svg-icons/content/save';
 import RemoveIcon from 'material-ui/svg-icons/av/remove-from-queue';
 
+/*
 const styles = {
     smallIcon: {
         width: 20,
@@ -16,6 +17,7 @@ const styles = {
         padding: 16,
     }
 };
+*/
 
 export default class CommandButtons extends React.Component {
 

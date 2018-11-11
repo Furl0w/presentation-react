@@ -3,9 +3,6 @@ import './editMetaSlid.css'
 import TextField from 'material-ui/TextField';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 
-import { connect } from 'react-redux'
-
-
 export default class EditMetaSlid extends React.Component {
 
     render() {

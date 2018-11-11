@@ -54,9 +54,9 @@ export const removeSlid = (id) => {
     }
 }
 
-export const sendCommand = (cmd) => {
-        return {
-            type: 'COMMAND_PRESENTATION',
-            obj: cmd
-        }
+export const sendCommand = (cmdPres) => {
+    return {
+        type: 'COMMAND_PRESENTATION',
+        obj: cmdPres
+    }
 }

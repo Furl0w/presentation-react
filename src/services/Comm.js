@@ -6,11 +6,10 @@ class Comm {
         this.comm = {};
         this.comm.io = {};
         this.socket = "";
-        this.emitOnConnect = this.emitOnConnect.bind(this);
 
     }
 
-    toString() {
+    toString = () => {
         return '';
     }
 
@@ -18,18 +17,15 @@ class Comm {
         return axios.get('/uuid');
     }
 
-    loadPres(presId, callback, callbackErr) {
+    loadPres = (presId, callback, callbackErr) => {
         axios.get('/loadPres')
             .then(function (data) {
                 var size = Object.keys(data.data).length;
-                console.log("raw data");
-                console.log(data.data);
+                console.log("raw data", data.data);
                 let loadedPres = ""
                 if (size > 0) {
-                    console.log("key");
-                    console.log(Object.keys(data.data)[0]);
-                    console.log("data");
-                    console.log(data.data[Object.keys(data.data)[0]]);
+                    console.log("key", Object.keys(data.data)[0]);
+                    console.log("data", data.data[Object.keys(data.data)[0]]);
                     loadedPres = data.data[Object.keys(data.data)[0]];
                 }
                 callback(loadedPres);
@@ -40,7 +36,7 @@ class Comm {
 
     }
 
-    loadContent(callback, callbackErr) {
+    loadContent = (callback, callbackErr) => {
         axios.get('/contents')
             .then(function (data) {
                 //console.log("raw content data");
@@ -61,7 +57,7 @@ class Comm {
 
     }
 
-    savPres(presJson, callbackErr) {
+    savPres = (presJson, callbackErr) => {
         axios.post('/savePres', presJson)
             .then(function (response) {
                 console.log(response);
@@ -71,7 +67,7 @@ class Comm {
             });
     }
 
-    savContent(contentJson, callbackErr) {
+    savContent = (contentJson, callbackErr) => {
         axios.post('/addContent', contentJson)
             .then(function (response) {
                 console.log(response);
@@ -81,7 +77,7 @@ class Comm {
             });
     }
 
-    fileUpload(fileC, callback, callbackErr) {
+    fileUpload = (fileC, callback, callbackErr) => {
         var data = new FormData();
         data.append('file', fileC);
         axios.post('/file-upload', data)
@@ -95,21 +91,19 @@ class Comm {
 
     }
 
-    emitOnConnect(message) {
-        console.log("message");
-        console.log("socket");
-        console.log(this.socket);
-        console.log("this.comm.io.uuid");
-        console.log(this.comm.io.uuid);
+    emitOnConnect = (message) => {
+        console.log("message", message);
+        console.log("socket", this.socket);
+        console.log("this.comm.io.uuid", this.comm.io.uuid);
         this.socket.emit('data_comm', { 'id': this.comm.io.uuid }, function (test) {
-            console.log(test);
+            console.log("emitOnConnect", test);
         });
     }
 
-    socketConnection(uuid) {
+    socketConnection = (uuid) => {
         this.socket = io.connect(process.env.SOCKET_URL);
         this.comm.io.uuid = uuid;
-        this.socket.on('connection', message => { this.emitOnConnect(message) });
+        this.socket.on('connection', message => this.emitOnConnect(message));
 
         this.socket.on('newPres', function (socket) {
 
@@ -119,27 +113,27 @@ class Comm {
         });
     }
 
-    backward() {
+    backward = () => {
         this.socket.emit('slidEvent', { 'CMD': "PREV" });
     }
 
-    forward() {
+    forward = () => {
         this.socket.emit('slidEvent', { 'CMD': "NEXT" });
     }
 
-    play(presUUID) {
+    play = (presUUID) => {
         this.socket.emit('slidEvent', { 'CMD': "START", 'PRES_ID': presUUID });
     }
 
-    pause() {
+    pause = () => {
         this.socket.emit('slidEvent', { 'CMD': "PAUSE" });
     }
 
-    begin() {
+    begin = () => {
         this.socket.emit('slidEvent', { 'CMD': "BEGIN" });
     }
 
-    end() {
+    end = () => {
         this.socket.emit('slidEvent', { 'CMD': "END" });
     }
 
