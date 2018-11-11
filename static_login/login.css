@@ -1,0 +1,13 @@
+.main-div{
+  margin-left: 33%;
+  max-width: 33%;
+}
+
+#errorMessage{
+  display: none;
+}
+
+
+#wrongLogin{
+  display: none;
+}

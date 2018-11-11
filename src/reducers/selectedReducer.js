@@ -3,6 +3,7 @@ const selectedReducer = (state = { slid: {} }, action) => {
         case 'UPDATE_SELECTED_SLID':
             const newState1 = { slid: action.obj };
             return newState1;
+
         default:
             return state;
     }

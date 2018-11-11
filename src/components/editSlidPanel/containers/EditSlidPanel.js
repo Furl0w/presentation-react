@@ -3,29 +3,38 @@ import Slid from '../../common/slid/containers/Slid'
 
 import { connect } from 'react-redux'
 import { updateSlid } from '../../../actions'
+import PresentationNavigation from '../../common/presentation/components/PresentationNavigation';
 
 class EditSlidPanel extends React.Component {
-    constructor(props) {
-        super(props);
-        this.updateCurrentSlid = this.updateCurrentSlid.bind(this);
-    }
 
-    updateCurrentSlid(slid) {
-        this.props.dispatch(updateSlid(slid));
-    }
+    updateCurrentSlid = (slid) => this.props.dispatch(updateSlid(slid));
 
     render() {
-        if (Object.keys(this.props.selected_slid).length !== 0) {
-            return <Slid slid={this.props.selected_slid} onChange={this.updateCurrentSlid} displayMode={"FULL_MNG"}></Slid>
+        let result;
+
+        if (this.props.selected_slid) {
+            result = <Slid slid={this.props.selected_slid} onChange={this.updateCurrentSlid} displayMode={"FULL_MNG"}></Slid>;
         }
-        else {
-            return null
-        }
+
+        return (
+            <div>
+                <PresentationNavigation></PresentationNavigation>
+                <div className="EditSlid">
+                    {result}
+                </div>
+            </div>
+        );
     }
 }
 const mapStateToProps = (state, ownProps) => {
-    return {
-        selected_slid: state.selectedReducer.slid
+
+    if (state.updateModelReducer.presentation.slidArray && state.updateModelReducer.presentation.slidArray.find(slid => slid.id === state.selectedReducer.slid.id)) {
+        return {
+            selected_slid: state.selectedReducer.slid
+        }
+    }
+    else {
+        return {}
     }
 }
 export default connect(mapStateToProps)(EditSlidPanel);

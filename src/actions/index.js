@@ -25,3 +25,38 @@ export const updateSlid = (slid) => {
         obj: slid
     }
 }
+
+export const addContent = (content) => {
+    return {
+        type: 'ADD_CONTENT',
+        obj: content
+    }
+}
+
+export const savePresentation = (pres) => {
+    return {
+        type: 'SAVE_PRESENTATION',
+        obj: pres
+    }
+}
+
+export const addSlid = (slid) => {
+    return {
+        type: 'ADD_SLID',
+        obj: slid
+    }
+}
+
+export const removeSlid = (id) => {
+    return {
+        type: 'REMOVE_SLID',
+        obj: id
+    }
+}
+
+export const sendCommand = (cmdPres, params = {}) => {
+    return {
+        type: 'COMMAND_PRESENTATION',
+        obj: { cmdPres: cmdPres, params: params }
+    }
+}
