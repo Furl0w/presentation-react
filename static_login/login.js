@@ -10,7 +10,7 @@ function tryLogin() {
     }
     else {
         document.getElementById("errorMessage").style.display = "none";
-        credentials = JSON.stringify({ user: user, password: password })
+        credentials = JSON.stringify({ login: user, pwd: password })
         postRequest(credentials, 'http://localhost:1337/login', (e, data) => {
             console.log("e : " + e)
             console.log("data : " +data)
