@@ -1,7 +1,7 @@
 import React from 'react';
 import Content from '../../common/content/containers/Content'
 import AddContentPanel from '../components/AddContentPanel';
-import { addContent } from '../../../actions/index';
+import { addContent, sendCommand } from '../../../actions/index';
 import generateUUID from "../../../tools/tools";
 import Comm from '../../../services/Comm';
 
@@ -12,8 +12,10 @@ class browserContentPanel extends React.Component {
     addContentHandler = (content) => {
         
         // In dev
-        content.id = generateUUID(); 
-        this.props.dispatch(addContent(JSON.parse(JSON.stringify(content))))
+        //content.id = generateUUID();         
+        //this.props.dispatch(addContent(JSON.parse(JSON.stringify(content))))
+
+        this.props.dispatch(sendCommand('save-content', content));
 
         // In prod
         /*

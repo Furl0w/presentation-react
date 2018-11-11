@@ -1,6 +1,12 @@
 var io = require('socket.io-client');
 var axios = require('axios');
 
+const config = {
+    headers: {
+        'Content-Type': 'multipart/form-data'
+    }
+}
+
 class Comm {
     constructor() {
         this.comm = {};
@@ -67,10 +73,17 @@ class Comm {
             });
     }
 
-    savContent = (contentJson, callbackErr) => {
-        axios.post('/addContent', contentJson)
+    savContent = (contentJson, callback, callbackErr) => {
+        let formData = new FormData();
+        formData.set('title', contentJson.title)
+        formData.set('type', contentJson.type)
+        formData.set('src', contentJson.src)
+        //formData.append('file', imageFile); 
+
+        axios.post('/contents', formData, config)
             .then(function (response) {
-                console.log(response);
+                console.log("saved content response", response);
+                callback(response);
             })
             .catch(function (error) {
                 callbackErr(error);
