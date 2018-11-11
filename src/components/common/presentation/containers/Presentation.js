@@ -5,6 +5,8 @@ import CommandButtons from "../../../browsePresentationPanel/CommandButtons";
 
 import { connect } from 'react-redux'
 import { updatePresentation } from '../../../../actions'
+import { addSlid } from "../../../../actions";
+import generateUUID from "../../../../tools/tools";
 
 
 class Presentation extends React.Component {
@@ -18,12 +20,41 @@ class Presentation extends React.Component {
         this.props.dispatch(updatePresentation(this.props.pres));
     }
 
+    handleAddSlid = (e) => {
+
+        let newSlid = {
+            id: generateUUID(),  // In dev;
+            content_id: "",
+            title: "New Slide",
+            txt: "Some nice content"
+        };
+
+        this.props.dispatch(addSlid(newSlid));
+
+
+        // In prod
+        /*
+        Comm.getUUID()
+            .then(data => {
+                let newSlid = {
+                    id: data.data.uuid
+                    content_id: "",
+                    title: "New Slide",
+                    txt: "Some nice content"
+                };
+
+                this.props.dispatch(addSlid(newSlid));
+            })
+            .catch(console.error);
+            */
+    }
+
     render() {
         if (Object.keys(this.props.contentMap).length !== 0) {
             return (
                 <div>
                     <EditMetaPres title={this.props.pres.title} handleChangeTitle={this.handleChangeTitle} description={this.props.pres.description} handleChangeDescription={this.handleChangeDescription}></EditMetaPres>
-                    <CommandButtons/>
+                    <CommandButtons addSlid={this.handleAddSlid} />
                     <SlidList slidArray={this.props.pres.slidArray} contentMap={this.props.contentMap}></SlidList>
                 </div>
             )

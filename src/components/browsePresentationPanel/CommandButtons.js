@@ -23,7 +23,7 @@ export default class CommandButtons extends React.Component {
         return (
             <MuiThemeProvider>
                 <div className="Commands">
-                    <IconButton tooltip="Add" >
+                    <IconButton tooltip="Add" onClick={this.props.addSlid}>
                         <AddIcon color="#16a085"/>
                     </IconButton>
                     <IconButton tooltip="Save" >
