@@ -26,7 +26,7 @@ export default class CommandButtons extends React.Component {
                     <IconButton tooltip="Add" onClick={this.props.addSlid}>
                         <AddIcon color="#16a085"/>
                     </IconButton>
-                    <IconButton tooltip="Save" >
+                    <IconButton tooltip="Save" onClick={this.props.saveSlid}>
                         <SaveIcon color="#2980b9"/>
                     </IconButton>
                     <IconButton tooltip="Remove" onClick={this.props.removeSlid}>

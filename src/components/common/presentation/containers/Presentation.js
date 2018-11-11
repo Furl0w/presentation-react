@@ -5,7 +5,7 @@ import CommandButtons from "../../../browsePresentationPanel/CommandButtons";
 
 import { connect } from 'react-redux'
 import { updatePresentation } from '../../../../actions'
-import { addSlid, removeSlid } from "../../../../actions";
+import { addSlid, removeSlid, sendCommand } from "../../../../actions";
 import generateUUID from "../../../../tools/tools";
 
 
@@ -50,12 +50,14 @@ class Presentation extends React.Component {
 
     handleDelSlid = (e) => this.props.dispatch(removeSlid(this.props.selectedSlid.id));
 
+    handleSaveSlid = (e) => this.props.dispatch(sendCommand("CMD_SAVE"));
+
     render() {
         if (Object.keys(this.props.contentMap).length !== 0) {
             return (
                 <div>
                     <EditMetaPres title={this.props.pres.title} handleChangeTitle={this.handleChangeTitle} description={this.props.pres.description} handleChangeDescription={this.handleChangeDescription}></EditMetaPres>
-                    <CommandButtons addSlid={this.handleAddSlid} removeSlid={this.handleDelSlid} />
+                    <CommandButtons addSlid={this.handleAddSlid} removeSlid={this.handleDelSlid} saveSlid={this.handleSaveSlid} />
                     <SlidList slidArray={this.props.pres.slidArray} contentMap={this.props.contentMap}></SlidList>
                 </div>
             )
