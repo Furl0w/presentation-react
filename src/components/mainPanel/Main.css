@@ -7,7 +7,7 @@
     border-style: solid;
     border-width: 0px 1px 1px 1px;
     border-radius: 0px 0px 5px 5px;
-    width: 290px;
+    width: 300px;
     position: fixed;
     left: 0;
     right: 0;
@@ -64,4 +64,8 @@ iframe, object {
 .SlidMenu {    
     border-style: solid;
     border-width: 0px 0px 2px;
+}
+
+.SlidMenu.selected {
+    background-color: #EFEFEF;
 }

@@ -83,7 +83,7 @@ export default class Main extends React.Component {
         store.subscribe(() => {
             this.setState({ presentation: store.getState().updateModelReducer.presentation });
             this.setState({ contentMap: store.getState().updateModelReducer.content_map });
-            /*
+            
             let storeState = store.getState();
 
             switch (storeState.commandReducer.cmdPres) {
@@ -117,7 +117,6 @@ export default class Main extends React.Component {
 
                 default: break;
             }
-            */
         });
     }
 
