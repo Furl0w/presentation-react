@@ -20,7 +20,7 @@ class EditMetaPres extends React.Component {
                         onChange={this.props.handleChangeTitle}
                         value={this.props.title}
                     ></TextField>
-
+                    <br/>
                     <label htmlFor="currentPresText">Description</label>
                     <textarea
                         rows="5"

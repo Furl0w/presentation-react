@@ -6,19 +6,13 @@ import { updateSlid } from '../../../actions'
 import PresentationNavigation from '../../common/presentation/components/PresentationNavigation';
 
 class EditSlidPanel extends React.Component {
-    constructor(props) {
-        super(props);
-        this.updateCurrentSlid = this.updateCurrentSlid.bind(this);
-    }
 
-    updateCurrentSlid(slid) {
-        this.props.dispatch(updateSlid(slid));
-    }
+    updateCurrentSlid = (slid) => this.props.dispatch(updateSlid(slid));
 
     render() {
         let result;
 
-        if (Object.keys(this.props.selected_slid).length !== 0) {
+        if (this.props.selected_slid) {
             result = <Slid slid={this.props.selected_slid} onChange={this.updateCurrentSlid} displayMode={"FULL_MNG"}></Slid>;
         }
 
@@ -33,8 +27,14 @@ class EditSlidPanel extends React.Component {
     }
 }
 const mapStateToProps = (state, ownProps) => {
-    return {
-        selected_slid: state.selectedReducer.slid
+
+    if (state.updateModelReducer.presentation.slidArray.find(slid => slid.id === state.selectedReducer.slid.id)) {
+        return {
+            selected_slid: state.selectedReducer.slid
+        }
+    }
+    else {
+        return {}
     }
 }
 export default connect(mapStateToProps)(EditSlidPanel);

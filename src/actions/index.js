@@ -26,13 +26,6 @@ export const updateSlid = (slid) => {
     }
 }
 
-export const updateDraggedElt = (slid) => {
-    return {
-        type: 'UPDATE_DRAGGED_ELT',
-        obj: slid
-    }
-}
-
 export const addContent = (content) => {
     return {
         type: 'ADD_CONTENT',
@@ -50,6 +43,20 @@ export const savePresentation = (pres) => {
 export const addSlid = (slid) => {
     return {
         type: 'ADD_SLID',
+        obj: slid
+    }
+}
+
+export const removeSlid = (id) => {
+    return {
+        type: 'REMOVE_SLID',
+        obj: id
+    }
+}
+
+export const commandPresentation = (slid) => {
+    return {
+        type: 'test_SLID',
         obj: slid
     }
 }

@@ -38,12 +38,17 @@
     max-width: 200px;
     display: block;
     margin: 0 auto;
+    object-fit: scale-down;
 }
 
 .SlidMenu, .SlidContent {
     cursor: pointer!important;
     padding:5px;
     transition: background-color 0.3s;
+}
+
+iframe, object {
+    cursor: pointer!important;
 }
 
 .SlidMenu:hover, .SlidContent:hover {

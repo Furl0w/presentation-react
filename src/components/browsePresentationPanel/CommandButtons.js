@@ -29,11 +29,11 @@ export default class CommandButtons extends React.Component {
                     <IconButton tooltip="Save" >
                         <SaveIcon color="#2980b9"/>
                     </IconButton>
-                    <IconButton tooltip="Remove" >
+                    <IconButton tooltip="Remove" onClick={this.props.removeSlid}>
                         <RemoveIcon color="#e74c3c"/>
                     </IconButton>
                 </div>
-            </MuiThemeProvider >
+            </MuiThemeProvider>
         );
     }
 }
