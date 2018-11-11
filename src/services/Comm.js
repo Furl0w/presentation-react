@@ -126,7 +126,6 @@ class Comm {
     }
 
     emit = (slid) => {
-        console.log("emiting", this.socket, slid)
         this.socket.emit('slidEvent', { 'slid': slid });
     }
 

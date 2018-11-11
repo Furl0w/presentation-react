@@ -82,10 +82,9 @@ export default class Main extends React.Component {
             */
 
             let cmdPres = storeState.commandReducer.cmdPres,
-                params = storeState.commandReducer.params,                
-                crtSlid = storeState.selectedReducer.slid;
-
-
+                params = storeState.commandReducer.params,
+                crtSlid = storeState.selectedReducer.slid,
+                slidArray = storeState.updateModelReducer.presentation.slidArray;
 
             switch (cmdPres) {
                 case 'CMD_SAVE':
@@ -93,12 +92,11 @@ export default class Main extends React.Component {
                     break;
 
                 case 'cmd-prev':
-                    let prevPos = storeState.updateModelReducer.presentation.slidArray.findIndex(slid => slid.id === crtSlid.id);
+                    let prevPos = slidArray.findIndex(slid => slid.id === crtSlid.id);
 
                     if (prevPos > 0) {
-                        let prevSlid = storeState.updateModelReducer.presentation.slidArray[prevPos - 1]
+                        let prevSlid = slidArray[prevPos - 1]
                         this.comm.emit(prevSlid);
-                        this.comm.backward();
                         store.dispatch(sendCommand(''));
                         store.dispatch(setSelectedSlid(prevSlid));
                     }
@@ -108,11 +106,9 @@ export default class Main extends React.Component {
                     break;
 
                 case 'cmd-next':
-                    let pos = storeState.updateModelReducer.presentation.slidArray.findIndex(slid => slid.id === crtSlid.id);
-                    console.log("pos", pos, crtSlid, storeState.selectedReducer)
-                    if (pos > 0) {
-                        let nextSlid = storeState.updateModelReducer.presentation.slidArray[pos + 1]
-                        console.log("slid", nextSlid)
+                    let pos = slidArray.findIndex(slid => slid.id === crtSlid.id);
+                    if (pos < slidArray.length - 1) {
+                        let nextSlid = slidArray[pos + 1]
                         this.comm.emit(nextSlid);
                         store.dispatch(sendCommand(''));
                         store.dispatch(setSelectedSlid(nextSlid));
@@ -123,7 +119,8 @@ export default class Main extends React.Component {
                     break;
 
                 case 'cmd-play':
-                    this.comm.play(storeState.updateModelReducer.presentation.id)
+                    this.comm.emit(crtSlid);
+                    store.dispatch(sendCommand(''));
                     break;
 
                 case 'cmd-pause':
